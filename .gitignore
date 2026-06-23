@@ -1,0 +1,6 @@
+Frond-End/e_management/node_modules/
+Employee-Management/node_modules/
+node_modules/
+dist/
+build/
+npm-debug.log
