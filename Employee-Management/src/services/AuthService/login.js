@@ -23,7 +23,7 @@ exports.login = async (data) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" });
         console.log(token);
-        return { token };
+        return { token, role: user.role };
     }
     catch (error) {
         console.log(error);

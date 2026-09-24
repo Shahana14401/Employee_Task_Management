@@ -1,7 +1,9 @@
 import { useState } from "react";
 import API from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -14,10 +16,17 @@ export default function Login() {
                 password,
             });
             console.log(res.data);
-            if (res.data.token) {
+            if (res.data.role === "admin" && res.data.token) {
                 localStorage.setItem("token", res.data.token);
+                localStorage.setItem("role", res.data.role);
                 alert("Login Successful");
-                window.location.href = "/dashboard";
+                navigate("/admin");
+            }
+            else if (res.data.role === "user" && res.data.token) {
+                localStorage.setItem("token", res.data.token);
+                localStorage.setItem("role", res.data.role);
+                alert("Login Successful");
+                navigate("/dashboard");
             } else {
                 alert(res.data.message || "Login Failed");
                 // console.log(res);
